@@ -25,5 +25,23 @@ header {
 }
 a {
     text-decoration: none;
-    color:rgb(225, 187, 159)
+    color:rgb(225, 187, 159);
+    transition: 1s 2s;
 }
+a:link {
+    text-decoration: underline;
+    color:rgb(162, 242, 154);
+}
+a:visited {
+    color:rgb(161, 249, 249);
+}
+a:hover {
+    text-decoration: underline;
+    color:rgb(233, 168, 142);
+    transition: 0.3s;
+}
+a:active {
+    color: black;
+    opacity: 0.4;
+}
+
