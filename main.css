@@ -8,14 +8,15 @@ main {
     background-color:rgba(74, 48, 15, 0.748);
     color:rgb(231, 234, 166);
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 5px, 10px, 35.2px;
-
+    margin: 5px, 10px, 33px;
+    padding-bottom: 60px;
 }
 footer {
-    background-color:rgba(43, 28, 11, 0.714);
+    background-color:rgb(43, 28, 11);
     color:rgba(215, 215, 185, 0.888);
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 2px;
+    margin: 6px;
+    padding: 10px 0px;
     font-style: italic;
     position: fixed;
     bottom: 0;
