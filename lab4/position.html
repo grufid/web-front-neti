@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Оформление текста</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <style>
+        header, footer {
+            z-index: 100;
+        }
+        div {
+        width: 300px;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        background-color: white;
+        border: 1px dotted darkgreen;
+        margin: 15px;
+        position: relative;
+        z-index: 1;
+        }
+        .position-relative {
+            position: relative;
+            left: 170px;
+            top: -130px;
+            z-index: 0;
+            transition: z-index 1s;
+        }
+        .position-relative:hover {
+            z-index: 2;
+        }
+        .position-absolute {
+            position: absolute;
+            left: 400px;
+        }
+        .position-absolute:hover {
+            width: 400;
+            height: 90px;
+            background-color: brown;
+            box-shadow: 10px 10px 35px black;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    <header> 
+        НГТУ, ФБ, ФБИ-32, Лабораторная работа IV
+    </header>
+    <main>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-absolute">static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+
+    </main>
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
