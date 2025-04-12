@@ -9,13 +9,27 @@
     <link rel="shortcut icon" href="../favicon-32x32.png">
     <link rel="shortcut icon" href="../favicon-16x16.png">
     <style>
-        p {
-            text-align: center;
+        body {
+            overflow: hidden;
         }
-        div {
-            line-height: 50px;
-            opacity: 0;
-            transition: 1s;
+        img {
+            width: 800px; /* Чтобы изображение занимало всю ширину */
+            height: 600px;
+        }
+        .stena {
+            display: block; /* Убираем пробелы под изображением */
+            margin: 0 auto; /* Убираем отступы */
+            width: 800px; /* Чтобы изображение занимало всю ширину */
+            height: 600px;
+            cursor: pointer;
+        }
+        .data {
+            opacity: 0; /* Изначально скрываем облачки */
+            transition: opacity 0.3s;
+            position: absolute; /* Позиционируем облачки относительно .stena */
+        }
+        .stena:hover .data {
+            opacity: 1; /* Показываем облачки при наведении на .stena */
         }
         .a {
         width: 10px;
@@ -25,7 +39,7 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1000px;
+        left: 895px;
         top: -410px;
         border-radius: 50%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
@@ -38,8 +52,8 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1009px;
-        top: -460px;
+        left: 909px;
+        top: -450px;
         border-radius: 50%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
         }
@@ -51,8 +65,8 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1030px;
-        top: -520px;
+        left: 930px;
+        top: -500px;
         border-radius: 50%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
         }
@@ -64,8 +78,8 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1060px;
-        top: -590px;
+        left: 960px;
+        top: -570px;
         border-radius: 50%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
         }
@@ -77,8 +91,8 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1110px;
-        top: -670px;
+        left: 1010px;
+        top: -640px;
         border-radius: 50%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
         }
@@ -90,23 +104,13 @@
         border: 1px dotted rgb(95, 8, 8);
         margin: 15px;
         position: relative;
-        left: 1150px;
-        top: -970px;
+        left: 1060px;
+        top: -900px;
         border-radius: 40%;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.611);
         text-align: center;
         font-weight: bold; 
         font-size: 12px;
-        }
-        p:hower {
-            opacity: 1;
-            transition: opacity 2s;
-
-        }
-        div:hower {
-            opacity: 1;
-            transition: opacity 2s;
-
         }
     </style>
 </head>
@@ -116,16 +120,13 @@
         Вот так вот..
     </header>
     <main>
-        <p>
-            <img src = "../udivlennyi-kot.jpg">
-        </p>
-        <div>
-        <div class="a"></div>
-        <div class="b"></div>
-        <div class="c"></div>
-        <div class="d"></div>
-        <div class="e"></div>
-            <div class="f">
+        <div class='stena'><img src = "../udivlennyi-kot.jpg">
+        <div class="data a"></div>
+        <div class="data b"></div>
+        <div class="data c"></div>
+        <div class="data d"></div>
+        <div class="data e"></div>
+            <div class="data f">
                 <p>Buddy you're a boy make a big noise</p>
                 <p>Playin' in the street gonna be a big man some day</p>
                 <p>You got mud on yo' face</p>
@@ -136,12 +137,9 @@
                 <p>We will we will rock you</p>
             </div>
         </div>
-        
-
     </main>
     <footer>
         &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
-    </footer>
-    
+    </footer> 
 </body>
 </html>

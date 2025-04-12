@@ -4,19 +4,10 @@ body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0px;
 }
-header {
-    background-color:rgb(73, 20, 6);
-    color:rgb(215, 215, 185, 0.888);
-    font-family: 'Times New Roman', Times, serif;
-    margin: 0px;
-    padding: 10px;
-}
 main {
     color:rgba(23, 15, 3, 0.888);
     font-family: 'Times New Roman', Times, serif;
-    margin: 10px, 20px;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    margin: 10px 20px 30px;
 }
 a {
     text-decoration: none;
@@ -49,6 +40,13 @@ div.menu:hover {
     background-color:rgba(35, 21, 3, 0.749);
     box-shadow: 0 0 15px rgba(145, 77, 5, 0.595);
     transition: 0.7s;
+}
+header {
+    background-color:rgb(73, 20, 6);
+    color:rgb(215, 215, 185, 0.888);
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0px;
+    padding: 10px;
 }
 footer {
     background-color:rgb(73, 20, 6);
