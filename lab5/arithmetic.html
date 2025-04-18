@@ -14,6 +14,10 @@
             let inputB = document.getElementById('numberB');
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+            if(isNaN(a)) {
+                alert('Введите числовые значения в поля');
+                return;
+            }
             let result = a + b;
             alert(' Сумма ' + a + ' и ' + b + ' равна ' + result);   
         }
@@ -22,6 +26,10 @@
             let inputB = document.getElementById('numberB');
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+            if(isNaN(a)) {
+                alert('Введите числовые значения в поля');
+                return;
+            }
             let result = a - b;
             alert(' Разность ' + a + ' и ' + b + ' равна ' + result);   
         }
@@ -30,8 +38,74 @@
             let inputB = document.getElementById('numberB');
             let a = parseInt(inputA.value);
             let b = parseInt(inputB.value);
+            if(isNaN(a)) {
+                alert('Введите числовые значения в поля');
+                return;
+            }
             let result = a * b;
             alert(' Разность ' + a + ' и ' + b + ' равна ' + result);
+        }
+        function showDiv() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            if(b == 0) {
+                alert('На ноль делить нельзя!');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            if(isNaN(a)) {
+                alert('Введите числовые значения в поля')
+                inputA.focus();
+                inputA.select();
+                inputA.style.color = 'red';
+                inputA.style.borderColor = 'red';;
+                return;
+            }
+            inputA.style.color = '';
+            inputA.style.borderColor = '';
+            if(isNaN(b)) {
+                alert('Введите числовые значения в поля');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            inputB.style.color = '';
+            inputB.style.borderColor = '';
+            let result = a/b;
+            alert(a + ' / ' + b + ' = ' + result);
+        }
+        function showStep() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            if(a+b == 0) {
+                alert('Ошибка!');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = 'red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            if(isNaN(a)) {
+                alert('Ошибка!');
+                return;
+            }
+            if(isNaN(b)) {
+                alert('Ошибка!');
+                return;
+            }
+            inputB.style.color = '';
+            inputB.style.borderColor = '';
+            let result = a ** b;
+            alert(a + ' ^ ' + b + ' = ' + result);
         }
         function showAuthor () {
             let author = 'Авторка страницы:\nШамшиева Даяна Артуровна';
@@ -75,6 +149,8 @@
         <div class="message" onclick="showSum()">Найти сумму чисел</div>
         <div class="message" onclick="showSub()">Найти разность чисел</div>
         <div class="message" onclick="showMul()">Найти произведение чисел</div>
+        <div class="message" onclick="showDiv()">Найти отношение чисел</div>
+        <div class="message" onclick="showStep()">Найти степень числа</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
     <footer ondblclick="showFooter()">
