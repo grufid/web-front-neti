@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Корзина</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <style>
+        main {
+            position: relative;
+            height: 600px;
+        }
+        .tag {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid rgba(43, 2, 2, 0.821);
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            text-align: center;
+            line-height: 80px;
+            position: absolute;
+            transition: all 0.8s ease;
+            cursor: pointer;
+        }
+        .hidden {
+            transform: scale(0);
+            visibility: hidden;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+            border: 2px solid rgba(43, 2, 2, 0.821);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.3em;
+            background-color: rgba(135, 100, 100, 0.766);
+        }     
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, ФБИ-32, Лабораторная работа V
+    </header>
+    <main>
+        <button onclick="showAll()">Вернуть</button>
+        <div class="tag" style="background-color: rgb(131, 131, 156); left: 200px; top: 100px;">I</div>
+        <div class="tag" style="background-color: dimgrey; left: 300px; top: 400px;">II</div>
+        <div class="tag" style="background-color: rgb(167, 113, 113); left: 100px; top: 50px;">III</div>
+        <div class="tag" style="background-color: rgb(207, 148, 207); left: 700px; top: 200px;">IV</div>
+        <div class="tag" style="background-color: rgba(0, 255, 255, 0.586); left: 400px; top: 10px;">V</div>
+        <div class="tag" style="background-color: rgb(180, 145, 189); left: 350px; top: 250px;">VI</div>
+        <div class="tag" style="background-color: rgb(118, 153, 153); left: 800px; top: 300px;">VII</div>
+        <div class="tag" style="background-color: rgb(120, 162, 141); left: 500px; top: 100px;">VIII</div>
+        <div class="tag" style="background-color: rgb(101, 96, 135); left: 1000px; top: 150px;">IX</div>
+        <div class="tag" style="background-color: rgb(140, 104, 97); left: 1200px; top: 200px;">X</div>
+    </main>
+    
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>  
+    <script>
+        const tags = document.querySelectorAll('.tag');
+        tags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            tag.classList.add('hidden');
+        });
+        });
+        function showAll() {
+        tags.forEach(tag => {
+            tag.classList.remove('hidden');
+        });
+        }
+    </script>
+</body>
+</html>
