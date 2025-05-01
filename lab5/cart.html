@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Корзина</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script>
+        function showBasket() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let inputC = document.getElementById('numberC');
+            let inputD = document.getElementById('numberD');
+            let inputE = document.getElementById('numberE');
+            let a = parseInt(inputA.value) ||0; 
+            let b = parseInt(inputB.value) ||0;
+            let c = parseInt(inputC.value) ||0;
+            let d = parseInt(inputD.value) ||0;
+            let e = parseInt(inputE.value) ||0;
+            let result = 105*a + 90*b + 115*c + 59*d + 123*e;
+            knopka.textContent = 'Общая цена: ' + result + ' рублей';
+        }
+        function showNew() {
+            document.getElementById('numberA').value='';
+            document.getElementById('numberB').value='';
+            document.getElementById('numberC').value='';
+            document.getElementById('numberD').value='';
+            document.getElementById('numberE').value='';
+            document.getElementById('knopka').textContent='';
+        }
+    </script>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .basket {
+            width: 330px;
+            height: 450px;
+            border: 5px solid rgba(138, 114, 77, 0.851);
+            background-color: rgba(41, 8, 8, 0.885);
+            border-radius: 15px;
+
+        }
+        p {
+            margin: 7px;
+            color:rgba(223, 200, 172, 0.747);
+        }
+        h1 {
+            text-align: center;
+            color:rgba(184, 163, 138, 0.871);
+        }
+        input[type='number'] {
+            width: 90%;
+            margin-left: 10px;
+        }
+        button {
+            margin-left: 13px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 90%;
+            text-align: center;
+        }
+        #knopka {
+            color:antiquewhite;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, ФБИ-32, Лабораторная работа V
+    </header>
+    <main>
+        <div class="basket">
+            <h1>Корзина товаров</h1>
+            <p>Чак-чак (105р/пачка)</p>
+            <input type="number" min="0" placeholder="Введите количество упаковок Чак-чака:" id="numberA"><br>
+            <p>Киндер-сюрприз (90р/шт)</p>
+            <input type="number" min="0" placeholder="Введите количество киндеров:" id="numberB"><br>
+            <p>Пряники шоколадные (115р/пачка)</p>
+            <input type="number" min="0" placeholder="Введите количество упаковок Пряников:" id="numberC"><br>
+            <p>Тараллини (59р/пачка)</p>
+            <input type="number" min="0" placeholder="Введите количество упаковок Тараллини:" id="numberD"><br>
+            <p>Пряники с вишневой начинкой (123р/пачка)</p>
+            <input type="number" min="0" placeholder="Введите количество упаковок Пряников:" id="numberE"><br>
+            <button onclick="showBasket()">Рассчитать</button>
+            <button onclick="showNew()">Очистить</button>
+            <div id="knopka"></div>
+        </div>
+
+    </main>
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
