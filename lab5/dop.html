@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Вычисления</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <style>
+        p {
+            margin: 5px;
+        }
+        header {
+            z-index: 10;
+        }
+        main {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #image {
+            width: 600px;
+            height: auto;
+            transition: filter 0.3s ease;
+            position: absolute;
+            left: 460px;
+            top: 155px;
+        }
+        #filter-info {
+            font-weight: bold;
+        }
+        #help {
+            margin-top: 20px;
+            font-size: 14px;
+            border: 1px solid black;
+            position: fixed;
+            top: 540px;
+            left: 570px;
+        }
+    </style>
+    <script>
+        function applyFilter(event) {
+            const img = document.getElementById('image');
+            const info = document.getElementById('filter-info');
+            const rect = img.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const width = rect.width;
+            const percentage = (mouseX / width) * 100;
+
+            let filter = `invert(${percentage}%)`
+            let filterType = 'Invert';
+            let filterValue = `${percentage.toFixed(2)}%`;
+
+            if (event.ctrlKey) {
+                filter = `grayscale(${percentage}%)`;
+                filterType = 'Grayscale';
+                filterValue = `${percentage.toFixed(2)}%`;
+            } else if (event.altKey) {
+                filter = `blur(${percentage}px)`;
+                filterType = 'Blur';
+                filterValue = `${percentage.toFixed(2)}px`;
+            } else if (event.shiftKey) {
+                filter = `hue-rotate(${percentage * 3.6}deg)`; // 360° соответствует 100%
+                filterType = 'Hue-rotate';
+                filterValue = `${(percentage * 3.6).toFixed(2)}°`;
+            } 
+
+            img.style.filter = filter;
+            info.textContent = `Фильтр: ${filterType} | Степень: ${filterValue}`;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, ФБИ-32, Лабораторная работа V
+        <hr>
+    </header>
+    <main>
+        <h1 style='text-align: center;'>Применение фильтров к картинке</h1>
+        <img id="image" src="../cool-cats.jpg" alt="Пример картинки" onmousemove="applyFilter(event)" />
+        <div id="filter-info">Фильтр: none | Степень: 0%</div>
+
+        <div id="help">
+            <p>Наведите мышь на картинку, чтобы применить фильтр:</p>
+            <p>Левый край - минимальный эффект, правый - максимальный.</p>
+            <p>Нажмите Ctrl для grayscale, Alt для blur, Shift для hue-rotate.</p>
+        </div>
+    </main>
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
