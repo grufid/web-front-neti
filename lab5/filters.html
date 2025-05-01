@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Фильтры</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script>
+        function blurChange() {
+            let value =document.getElementById('blurValue').value + 'px';
+            document.getElementById('blurOutput').innerText = value;
+            let brightness = document.getElementById('brightnessValue').value + '%';
+            document.getElementById('brightnessOutput').innerText = brightness;
+            let contrast = document.getElementById('contrastValue').value + '%';
+            document.getElementById('contrastOutput').innerText = contrast;
+            let grayscale = document.getElementById('grayscaleValue').value + '%';
+            document.getElementById('grayscaleOutput').innerText = grayscale;
+            let hueRotate = document.getElementById('hueRotateValue').value + 'deg';
+            document.getElementById('hueRotateOutput').innerText = hueRotate;
+            let invert = document.getElementById('invertValue').value + '%';
+            document.getElementById('invertOutput').innerText = invert;
+            let saturate = document.getElementById('saturateValue').value + '%';
+            document.getElementById('saturateOutput').innerText = saturate;
+            let sepia = document.getElementById('sepiaValue').value + '%';
+            document.getElementById('sepiaOutput').innerText = sepia;
+            
+            document.getElementById('blurImage').style.filter = 
+                'blur(' + value + ')' + 
+                'brightness(' + brightness + ')' +
+                'contrast(' + contrast + ') ' +
+                'grayscale(' + grayscale + ') ' +
+                'hue-rotate(' + hueRotate + ') ' +
+                'invert(' + invert + ') ' +
+                'saturate(' + saturate + ')' +
+                'sepia(' + sepia + ')';
+        }
+    </script>
+</head>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, ФБИ-32, Лабораторная работа V
+        <hr>
+    </header>
+    <main>
+        <div>
+            Фильтр blur:
+            <input type="range" min="0" max="20" value='0' onchange="blurChange()" id="blurValue">
+            <span id="blurOutput"></span>
+        </div>
+        <div>
+            Фильтр brightness:
+            <input type="range" min="0" max="500" value='100' onchange="blurChange()" id="brightnessValue">
+            <span id="brightnessOutput"></span>
+        </div>
+        <div>
+            Фильтр contrast:
+            <input type="range" min="0" max="500" value='100' onchange="blurChange()" id="contrastValue">
+            <span id="contrastOutput"></span>
+        </div>
+        <div>
+            Фильтр grayscale:
+            <input type="range" min="0" max="100" value='0' onchange="blurChange()" id="grayscaleValue">
+            <span id="grayscaleOutput"></span>
+        </div>
+        <div>
+            Фильтр hue-rotate:
+            <input type="range" min="0" max="360" value='0' onchange="blurChange()" id="hueRotateValue">
+            <span id="hueRotateOutput"></span>
+        </div>
+        <div>
+            Фильтр invert:
+            <input type="range" min="0" max="100" value='0' onchange="blurChange()" id="invertValue">
+            <span id="invertOutput"></span>
+        </div>
+        <div>
+            Фильтр saturate:
+            <input type="range" min="0" max="500" value='100' onchange="blurChange()" id="saturateValue">
+            <span id="saturateOutput"></span>
+        </div>
+        <div>
+            Фильтр sepia:
+            <input type="range" min="0" max="100" value='0' onchange="blurChange()" id="sepiaValue">
+            <span id="sepiaOutput"></span>
+        </div>
+        <div><img src='../friends.jpg' id='blurImage' style="width: 950px; height: auto; position:absolute; left:500px; top: 70px;"></div>
+
+    </main>
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
