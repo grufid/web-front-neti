@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <style>
+        div {
+            background-color: rgb(205, 85, 85);
+            width: 300px;
+            height: 70px;
+            margin: 3px;
+        }
+    </style>
+    <script>
+        function showDiagram() {
+            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
+            let colors = ['red', 'green', 'brown', 'black', 'pink', 'gray', 'white', 'blue', 'orange', 'yellow']
+            let bars = document.getElementsByClassName('bar');
+            const diagWidth = document.getElementById('diag').clientWidth;
+            const maxData = Math.max(...data);
+            const k = diagWidth / maxData * 0.9;
+            
+            for(let i = 0; i < data.length; i++) {
+                bars[i].style.width = k*data[i] + 'px';
+
+            }
+        }
+    </script>
+</head>
+<body onload="showDiagram()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+        <hr>
+    </header>
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
