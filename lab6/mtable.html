@@ -10,14 +10,25 @@
     <link rel="shortcut icon" href="../favicon-16x16.png">
     <script>
         function showMultipleTable() {
+            let a = parseInt(document.getElementById('a').value);
+            let b = parseInt(document.getElementById('b').value);
+            let c = parseInt(document.getElementById('c').value);
             let tbl = document.getElementById('mtable');
             tbl.innerHTML = '<h1>Таблица умножения</h1>';
-            for(i = 1; i <=10; i++) {
-                let s = `<div>${i} * 7 = ${i*7}</div>`;
+            
+            for(let i = a; i <=c; i++) {
+                let s = `<div>${i} * ${b} = ${i*b}</div>`;
                 tbl.innerHTML +=s;
             }
+            if(a > b) {
+                alert('Ошибка');
+                return;
+            }
         }
-        showMultipleTable()
+
+        function changeOutput() {
+            showMultipleTable()
+        }
 
     </script>
 </head>
@@ -27,6 +38,13 @@
     </header>
     <main>
         <div id="mtable" style="font-family: 'Times New Roman', Times, serif; font-size: 1.5em; font-weight: bold;"></div> 
+        <label>Умножить на: <input type="number" value="7" id="b"></label><br>
+        <label>Начать с: <input type="number" value="1" id="a"></label><br>
+        <label>Закончить на: <input type="number" value="10" id="c"></label><br>
+        <div><input type="button" value="Таблица" onclick="changeOutput()"></div>
+        
+        <div id="output"></div>
+
     </main>
 
     <footer>
