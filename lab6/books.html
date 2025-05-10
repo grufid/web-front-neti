@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Шамшиева Даяна Артуровна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon-32x32.png">
+        <link rel="shortcut icon" href="../favicon-16x16.png">
+        <script src="books.js"></script>
+        <script>
+            function showBooks() {
+                const bookList = document.getElementById('bookList');
+                    for(let i = 0; i < books.length; i++) {
+                    const book = books[i];
+                    let bookClass = 'book';
+
+                    if (book.bestseller) {
+                        bookClass += ' bestseller';
+                    }
+                    if (!book.available) {
+                        bookClass += ' unavailable';
+                    }
+                   
+                     bookList.innerHTML += `
+                        <div class="${bookClass}">
+                            <b>${ books[i].author}.</b>
+                            <i>${ books[i].name}</i>
+                            &mdash; ${ books[i].publicationYear}
+                            &mdash; Цена: ${books[i].price}
+                            ${book.bestseller ?  '<sup style="background-color: red; padding: 4px; border-radius: 7px; color:#ddd">Бестселлер!</sup>':''}
+                            ${book.available ? '' : '<br><span><i>Временно распродано</i></span>'}                      
+                        </div>
+                    `;
+                }
+            }
+        </script>
+        <style>
+            .book {
+                border: 1px solid rgb(44, 22, 22);
+                box-shadow: 0 0 10px rgb(41, 12, 12);
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #fff;
+                transition: 0.3s;
+            }
+            .book:hover {
+                transform: scale(1.018);
+                box-shadow: 0 0 15px #a00;
+            }
+            .unavailable {
+                color: #888;
+                background-color: #f5f5f5;
+                border-color: #ccc;
+            }
+            .bestseller {
+                border: 2px solid gold;
+                background-color: #fff8dc;
+                font-weight: bold;
+            }
+            h1 {
+                text-align: center;
+                text-shadow: -1px -1px #000, 0 1px 0 #444;
+                color: #282222;
+            }
+        </style>
+    </head>
+    <body onload="showBooks()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+        </header>
+        <main>
+            <h1>Список книг</h1>
+            <div id="bookList">
+
+            </div>
+
+        </main>
+        <footer>
+            &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+        </footer>
+    </body>
+</html>
