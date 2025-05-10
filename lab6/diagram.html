@@ -9,26 +9,37 @@
     <link rel="shortcut icon" href="../favicon-32x32.png">
     <link rel="shortcut icon" href="../favicon-16x16.png">
     <style>
-        div {
-            background-color: rgb(205, 85, 85);
-            width: 300px;
-            height: 70px;
-            margin: 3px;
+        #diag {
+            position: relative;
+            height: 500px;
+            width: 1400px;
+            display: flex;
+            align-items: flex-end;
+            margin: 40px;
+        }
+        .bar {
+            width: 80px;
+            margin: 2px;
+            text-align: center;
+            padding-top: 9px;
+            color: #000000;
         }
     </style>
     <script>
         function showDiagram() {
-            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
-            let colors = ['red', 'green', 'brown', 'black', 'pink', 'gray', 'white', 'blue', 'orange', 'yellow']
+            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43, 150, 30, 87, 22, 54, 88, 65];
+            let colors = ['red', '#D2B48C', '#800000', '#BDB76B', '#DDA0DD', 'gray', '#483D8B', 'blue', 'orange', '#008080', '#556B2F', '#F0FFF0', '#4169E1', '#5F9EA0', '#800080', '#2F4F4F', '#FFE4E1'];
             let bars = document.getElementsByClassName('bar');
-            const diagWidth = document.getElementById('diag').clientWidth;
+            const diagHeight = document.getElementById('diag').clientHeight;
             const maxData = Math.max(...data);
-            const k = diagWidth / maxData * 0.9;
+            const k = diagHeight / maxData * 0.9;
             
             for(let i = 0; i < data.length; i++) {
-                bars[i].style.width = k*data[i] + 'px';
-
+                bars[i].style.height = k*data[i] + 'px';
+                bars[i].style.backgroundColor = colors[i % colors.length];
+                bars[i].innerText = data[i];
             }
+            
         }
     </script>
 </head>
@@ -39,6 +50,13 @@
     </header>
     <main>
         <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
