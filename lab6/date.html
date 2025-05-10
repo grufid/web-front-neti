@@ -27,15 +27,58 @@
                 <div>Египетская локаль: ${arabic}</div>
             `;
         }
-          
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+        let timerNum;
+        function startChangeColors() {
+            if (timerNum !== null) return;
+            changeColors();
+            timerNum = setInterval(changeColors, 900);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+        function stopChangeColors(){
+            clearInterval(timerNum);
+            timerNum = null;
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
+        let DateNum;
+        function startChangeDate(){
+            if (DateNum !== null);
+            showDate();
+            DateNum = setInterval(showDate, 1000);
+            document.getElementById('startDate-btn').disabled = true;
+            document.getElementById('stopDate-btn').disabled = false;
+        }
+        function stopChangeDate(){
+            clearInterval(DateNum);
+            DateNum = null;
+            document.getElementById('startDate-btn').disabled = false;
+            document.getElementById('stopDate-btn').disabled = true;
+        }
+
             
         
     </script>
     <style>
         div {
             margin: 5px;
-            font-size: 1.035em;
+            font-size: 1.4em;
             text-shadow: 0.5px 0.5px 1px black;
+            text-align: center;
+        }
+        button {
+            border-radius: 20px;
+            width: 250px;
+            height: 50px;
+            box-shadow: 1px 2px 3px black;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+        
         }
     </style>
 </head>
@@ -46,6 +89,12 @@
     </header>
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()">Начать изменение цвета</button>
+            <button onclick="stopChangeColors()">Остановить</button><br>
+            <button onclick="startChangeDate()" style="margin-top:10px; background-color: rgb(73, 15, 15); color:antiquewhite">Обновить время</button>
+            <button onclick="stopChangeDate()" style="background-color:rgb(73, 15, 15); color:antiquewhite">Остановить</button>
+        </div>
     </main>
 
     <footer>
