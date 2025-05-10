@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script>
+        function showDate() {
+            let out = document.getElementById('current-date');
+            let russian = new Date().toLocaleString('ru-RU');
+            let thai = new Date().toLocaleString('th-TH');
+            let korean = new Date().toLocaleString('ko-KR');
+            let kannada = new Date().toLocaleString('kn-IN');
+            let greek = new Date().toLocaleString('el-GR');
+            let arabic = new Date().toLocaleString('ar-EG');
+
+            out.innerHTML = `
+                <div>Российская локаль: ${russian}</div>
+                <div>Тайландская локаль: ${thai}</div>
+                <div>Корейская локаль: ${korean}</div>
+                <div>Индийская локаль: ${kannada}</div>
+                <div>Греческая локаль: ${greek}</div>
+                <div>Египетская локаль: ${arabic}</div>
+            `;
+        }
+          
+            
+        
+    </script>
+    <style>
+        div {
+            margin: 5px;
+            font-size: 1.035em;
+            text-shadow: 0.5px 0.5px 1px black;
+        }
+    </style>
+</head>
+<body onload="showDate()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+        <hr>
+    </header>
+    <main>
+        <div id="current-date"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
