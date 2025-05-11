@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Температурная диаграмма</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <style>
+        #chart-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+
+        }
+        #input-day {
+            text-align: center;
+            margin-top: 20px;    
+        }
+        #output {
+            font-weight: bold;
+            margin-top: 10px; 
+        }
+        h1 {
+            text-align: center;
+            text-shadow: 5px 5px 15px #999;
+        }   
+            
+    </style>
+</head>
+<body>
+    <header>НГТУ, ФБ, Лабораторная работа 6</header>
+    <main>
+        <h1>Температура на месяц</h1>
+    <div id="chart-container">
+        <canvas id="tempChart"></canvas>
+    </div>
+
+    <div id="input-day">
+        <label for="dayInput">Введите номер дня (1–30): </label>
+        <input type="number" id="dayInput" min="1" max="30">
+        <div id="output"></div>
+    </div>
+    </main>
+    <footer>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+
+    <script>
+    // Создаём массивы температур
+        let labels = []
+        let minTemps = []
+        let ranges = [] // max - min
+        for (let i = 0; i < 30; i++) {
+        let min = Math.floor(Math.random() * 10 - 5)
+        let max = min + Math.floor(Math.random() * 10 + 5)
+        labels.push(`День ${i + 1}`)
+        minTemps.push(min)
+        ranges.push(max - min)
+        }
+
+        // Стандартные цвета
+        let minColors = Array(30).fill('rgba(54, 162, 235, 0.7)')
+        let maxColors = Array(30).fill('rgba(247, 42, 42, 0.5)')
+
+        const ctx = document.getElementById('tempChart').getContext('2d')
+
+        const tempChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+            {
+                label: 'Минимум',
+                data: minTemps,
+                backgroundColor: minColors,
+                stack: 'stack1'
+            },
+            {
+                label: 'Разница до максимума',
+                data: ranges,
+                backgroundColor: maxColors,
+                stack: 'stack1'
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: false,
+                title: {
+                display: true,
+                text: 'Температура (°C)'
+                }
+            }
+            },
+            plugins: {
+            tooltip: {
+                callbacks: {
+                label: function(ctx) {
+                    let index = ctx.dataIndex
+                    let min = minTemps[index]
+                    let max = min + ranges[index]
+                    return `Мин: ${min}°C, Макс: ${max}°C`
+                }
+                }
+            }
+            }
+        }
+        })
+
+        document.getElementById('dayInput').addEventListener('input', function () {
+        let day = parseInt(this.value)
+        if (day >= 1 && day <= 30) {
+            // Сброс цветов
+            for (let i = 0; i < 30; i++) {
+            minColors[i] = 'rgba(54, 162, 235, 0.7)'
+            maxColors[i] = 'rgba(247, 42, 42, 0.4)'
+            }
+            // Подсветка выбранного дня
+            minColors[day - 1] = 'rgba(54, 162, 235, 1)'
+            maxColors[day - 1] = 'rgba(247, 42, 42, 1)'
+            // Обновление
+            tempChart.update()
+            let min = minTemps[day - 1]
+            let max = min + ranges[day - 1]
+            document.getElementById('output').textContent = `
+            День ${day}: мин ${min}°C, макс ${max}°C`
+        } else {
+            document.getElementById('output').textContent = ''
+        }
+        })
+    </script>
+</body>
+</html>
