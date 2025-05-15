@@ -11,20 +11,21 @@
     <script>
         function showDate() {
             let out = document.getElementById('current-date');
-            let russian = new Date().toLocaleString('ru-RU');
-            let thai = new Date().toLocaleString('th-TH');
-            let korean = new Date().toLocaleString('ko-KR');
-            let kannada = new Date().toLocaleString('kn-IN');
-            let greek = new Date().toLocaleString('el-GR');
-            let arabic = new Date().toLocaleString('ar-EG');
+            let today = new Date();
+            let russian = today.toLocaleString('ru-RU');
+            let thai = today.toLocaleString('th-TH');
+            let korean = today.toLocaleString('ko-KR');
+            let kannada = today.toLocaleString('kn-IN');
+            let greek = today.toLocaleString('el-GR');
+            let arabic = today.toLocaleString('ar-EG');
 
             out.innerHTML = `
-                <div>Российская локаль: ${russian}</div>
-                <div>Тайландская локаль: ${thai}</div>
-                <div>Корейская локаль: ${korean}</div>
-                <div>Индийская локаль: ${kannada}</div>
-                <div>Греческая локаль: ${greek}</div>
-                <div>Египетская локаль: ${arabic}</div>
+                Российская локаль: ${russian}<br>
+                Тайландская локаль: ${thai}<br>
+                Корейская локаль: ${korean}<br>
+                Индийская локаль: ${kannada}<br>
+                Греческая локаль: ${greek}<br>
+                Египетская локаль: ${arabic}<br>
             `;
         }
         function changeColors() {
@@ -34,51 +35,38 @@
         }
         let timerNum;
         function startChangeColors() {
-            if (timerNum !== null) return;
             changeColors();
-            timerNum = setInterval(changeColors, 900);
+            timerNum = setInterval(changeColors, 1000);
             document.getElementById('start-btn').disabled = true;
             document.getElementById('stop-btn').disabled = false;
         }
-        function stopChangeColors(){
+        function stopChangeColors() {
             clearInterval(timerNum);
-            timerNum = null;
             document.getElementById('start-btn').disabled = false;
             document.getElementById('stop-btn').disabled = true;
         }
         let DateNum;
-        function startChangeDate(){
-            if (DateNum !== null);
+        function startChangeDate() {
             showDate();
             DateNum = setInterval(showDate, 1000);
-            document.getElementById('startDate-btn').disabled = true;
-            document.getElementById('stopDate-btn').disabled = false;
+            document.getElementById('start-time-btn').disabled = true;
+            document.getElementById('stop-time-btn').disabled = false;
         }
-        function stopChangeDate(){
+        function stopChangeDate() {
             clearInterval(DateNum);
-            DateNum = null;
-            document.getElementById('startDate-btn').disabled = false;
-            document.getElementById('stopDate-btn').disabled = true;
-        }
-
-            
-        
+            document.getElementById('start-time-btn').disabled = false;
+            document.getElementById('stop-time-btn').disabled = true;
+        }  
     </script>
     <style>
-        div {
-            margin: 5px;
-            font-size: 1.4em;
-            text-shadow: 0.5px 0.5px 1px black;
-            text-align: center;
+        header {
+            transition: color 1s;
         }
-        button {
-            border-radius: 20px;
-            width: 250px;
-            height: 50px;
-            box-shadow: 1px 2px 3px black;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 16px;
-        
+        div {
+            color: black;
+            text-align: center;
+            font-size: 25px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -90,10 +78,12 @@
     <main>
         <div id="current-date"></div>
         <div>
-            <button onclick="startChangeColors()">Начать изменение цвета</button>
-            <button onclick="stopChangeColors()">Остановить</button><br>
-            <button onclick="startChangeDate()" style="margin-top:10px; background-color: rgb(73, 15, 15); color:antiquewhite">Обновить время</button>
-            <button onclick="stopChangeDate()" style="background-color:rgb(73, 15, 15); color:antiquewhite">Остановить</button>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+         </div>
+        <div>
+            <button onclick="startChangeDate()" id="start-time-btn">Обновить время</button>
+             <button onclick="stopChangeDate()" disabled id="stop-time-btn">Остановить время</button>
         </div>
     </main>
 

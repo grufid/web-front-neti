@@ -1,138 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Температурная диаграмма</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../main.css">
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../favicon-32x32.png">
-    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Шамшиева Даяна Артуровна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon-32x32.png">
+        <link rel="shortcut icon" href="../favicon-16x16.png">
     <style>
-        #chart-container {
-            width: 90%;
-            max-width: 900px;
-            margin: 30px auto;
+    body {
+        text-align: center;
+        padding: 20px;
+        overflow: hidden;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        text-align: left;
+    }
+    h2 {
+        margin-top: 80px;
+        font-size: 1.9em;
+        color: #000000d3;
+        text-shadow: 5px 3px 7px #928367e5;
+    }
+    #chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 12px;
+        margin: 30px auto;
+        height: 400px;
+        width: 95%;
+        max-width: 1000px;
+    }
+    .bar {
+        width: 36px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    .max, .min {
+        width: 100%;
+        color: rgb(255, 255, 255);
+        font-size: 12px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        position: relative;
+        border-radius: 4px;
+    }
+    .max {
+        background: #ec0a0a72;
+    }
 
-        }
-        #input-day {
-            text-align: center;
-            margin-top: 20px;    
-        }
-        #output {
-            font-weight: bold;
-            margin-top: 10px; 
-        }
-        h1 {
-            text-align: center;
-            text-shadow: 5px 5px 15px #999;
-        }   
-            
+    .min {
+        background: #007bff9a;
+    }
+
+    .highlight .min {
+        background: #007bff;
+        font-size: 1.05em;
+    }
+
+    .highlight .max {
+        background:  #ec0a0a;
+        font-size: 1.05em;
+    }
+    input, button {
+        padding: 8px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button {
+        background: #1e0701;
+        color: rgba(255, 255, 255, 0.693);
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 6px;
+    }
+    button:hover {
+        background: #751403;
+    }
     </style>
 </head>
 <body>
-    <header>НГТУ, ФБ, Лабораторная работа 6</header>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+        <hr>
+    </header>
     <main>
-        <h1>Температура на месяц</h1>
-    <div id="chart-container">
-        <canvas id="tempChart"></canvas>
+    <h2>Температура за месяц (30 дней)</h2>
+    <div id="chart"></div>
+
+    <div>
+        <label for="dayInput">Введите номер дня (1–30):</label>
+        <input type="number" id="dayInput" min="1" max="30" />
+        <button onclick="highlightDay()">Найти</button>
     </div>
 
-    <div id="input-day">
-        <label for="dayInput">Введите номер дня (1–30): </label>
-        <input type="number" id="dayInput" min="1" max="30">
-        <div id="output"></div>
-    </div>
+    <div id="info" class="info"></div>
     </main>
     <footer>
+        <hr>
         &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
     </footer>
 
     <script>
-    // Создаём массивы температур
-        let labels = []
-        let minTemps = []
-        let ranges = [] // max - min
+        const chart = document.getElementById('chart');
+        const info = document.getElementById('info');
+        let temperatures = [];
+
+        function generateData() {
         for (let i = 0; i < 30; i++) {
-        let min = Math.floor(Math.random() * 10 - 5)
-        let max = min + Math.floor(Math.random() * 10 + 5)
-        labels.push(`День ${i + 1}`)
-        minTemps.push(min)
-        ranges.push(max - min)
+            const min = Math.floor(Math.random() * 10 + 5); // 5–15
+            const max = min + Math.floor(Math.random() * 15 + 5); // 10–30
+            temperatures.push({ min, max });
+        }
         }
 
-        // Стандартные цвета
-        let minColors = Array(30).fill('rgba(54, 162, 235, 0.7)')
-        let maxColors = Array(30).fill('rgba(247, 42, 42, 0.5)')
+        function createChart() {
+        chart.innerHTML = '';
+        temperatures.forEach((temp, index) => {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.dataset.index = index;
 
-        const ctx = document.getElementById('tempChart').getContext('2d')
+            const maxBar = document.createElement('div');
+            maxBar.className = 'max';
+            const maxHeight = (temp.max - temp.min) * 8;
+            maxBar.style.height = `${maxHeight}px`;
+            maxBar.textContent = `${temp.max}°`;
 
-        const tempChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [
-            {
-                label: 'Минимум',
-                data: minTemps,
-                backgroundColor: minColors,
-                stack: 'stack1'
-            },
-            {
-                label: 'Разница до максимума',
-                data: ranges,
-                backgroundColor: maxColors,
-                stack: 'stack1'
-            }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-            y: {
-                beginAtZero: false,
-                title: {
-                display: true,
-                text: 'Температура (°C)'
-                }
-            }
-            },
-            plugins: {
-            tooltip: {
-                callbacks: {
-                label: function(ctx) {
-                    let index = ctx.dataIndex
-                    let min = minTemps[index]
-                    let max = min + ranges[index]
-                    return `Мин: ${min}°C, Макс: ${max}°C`
-                }
-                }
-            }
-            }
+            const minBar = document.createElement('div');
+            minBar.className = 'min';
+            minBar.style.height = `${temp.min * 8}px`;
+            minBar.textContent = `${temp.min}°`;
+
+            const label = document.createElement('div');
+            label.className = 'label';
+            label.textContent = `${index + 1}`;
+
+            bar.appendChild(maxBar);
+            bar.appendChild(minBar);
+            bar.appendChild(label);
+            chart.appendChild(bar);
+        });
         }
-        })
 
-        document.getElementById('dayInput').addEventListener('input', function () {
-        let day = parseInt(this.value)
-        if (day >= 1 && day <= 30) {
-            // Сброс цветов
-            for (let i = 0; i < 30; i++) {
-            minColors[i] = 'rgba(54, 162, 235, 0.7)'
-            maxColors[i] = 'rgba(247, 42, 42, 0.4)'
-            }
-            // Подсветка выбранного дня
-            minColors[day - 1] = 'rgba(54, 162, 235, 1)'
-            maxColors[day - 1] = 'rgba(247, 42, 42, 1)'
-            // Обновление
-            tempChart.update()
-            let min = minTemps[day - 1]
-            let max = min + ranges[day - 1]
-            document.getElementById('output').textContent = `
-            День ${day}: мин ${min}°C, макс ${max}°C`
+        function highlightDay() {
+        const input = document.getElementById('dayInput').value;
+        const day = parseInt(input) - 1;
+
+        [...chart.children].forEach(bar => bar.classList.remove('highlight'));
+
+        if (day >= 0 && day < 30) {
+            chart.children[day].classList.add('highlight');
+            const { min, max } = temperatures[day];
+            info.textContent = `День ${day + 1}: мин. температура ${min}°C, макс. температура ${max}°C`;
         } else {
-            document.getElementById('output').textContent = ''
+            info.textContent = 'Пожалуйста, введите число от 1 до 30.';
         }
-        })
+        }
+        generateData();
+        createChart();
     </script>
-</body>
+    </body>
 </html>
