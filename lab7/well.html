@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script src="promotion.js"></script>
+    <script>
+        function showExchange() {
+            let table = document.getElementById('share-table');
+            let headers = ['Дата', 'Цена акций, руб.', 'Разница'];
+                let headerRow = table.insertRow();
+                headers.forEach(function(text) {
+                let th = document.createElement('th');
+                th.textContent = text;
+                th.style.padding = '10px';
+                headerRow.appendChild(th);})
+
+            for(let i = 0; i < exchange.length; i++) {
+            let tr = table.insertRow();   
+
+            let tdDate = tr.insertCell();
+            tdDate.textContent = dates[i];
+                
+            let tdPrice = tr.insertCell();
+            tdPrice.textContent = exchange[i].toFixed(2);
+                
+            let tdDiff = tr.insertCell();
+            if(i === 0) {
+                tdDiff.textContent = '-';
+            } else {
+                let diff = exchange[i] - exchange[i-1];
+                tdDiff.textContent = diff.toFixed(2);
+                if(diff > 0) {
+                    tdDiff.style.color = 'green';
+                } else if(diff < 0) {
+                    tdDiff.style.color = 'red';
+                    }
+                }
+            }
+            let sum = 0;
+            for(let i = 0; i < exchange.length; i++) {
+                sum += exchange[i];
+            }
+            let average = sum / exchange.length;
+            average = average.toFixed(2);
+            let max = Math.max.apply(null, exchange);
+            max = max.toFixed(2);
+            let min = Math.min.apply(null, exchange);
+            min = min.toFixed(2);
+
+            document.getElementById('detail').innerHTML = 
+            'Среднее значение курса: ' + average + ' RUB' + '<br>' +
+            'Максимальное значение: ' + max  + ' RUB' + '<br>' +
+            'Минимальное значение: ' + min  + ' RUB';
+                
+            let button = document.querySelector('button');
+            button.style.display = 'none';
+        }
+    </script>
+    <style>
+        main {
+            text-align: center;
+        }
+        button {
+            border-radius: 0px;
+            height: 70px;
+            color: rgb(198, 186, 186);
+            background-color: rgb(86, 39, 39);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2em;
+        }
+        h1 {
+            text-shadow: 2px 2px 12px rgb(214, 208, 208);
+        }
+        td {
+            border: 2px solid rgb(133, 116, 116);
+            background-color: rgb(51, 47, 47);
+            color: rgb(218, 204, 204);
+            font-family: 'Times New Roman', Times, serif;
+            width: 90px;
+            height: 20px;
+            font-size: 1.2em;
+        }
+        #share-table {
+            margin: 20px auto;
+        }
+        #detail {
+            font-size: 1.3em;
+            font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        «Норникель»
+    </header>
+    <main>
+        <h1> Курс акций "Норникель"</h1>
+        <button onclick="showExchange()">Показать курс</button>
+        <table border="1" id="share-table"></table>
+        <div id="detail"></div>
+        
+
+    </main>
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>    
+</body>
+</html>
