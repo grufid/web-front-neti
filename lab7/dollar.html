@@ -8,36 +8,74 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
     <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+    <script src="dollar.js"></script>
     <script>
         function showExchange() {
-            const exchange  = [
-                	85.4963, 84.8707, 84.5522, 84.3830, 
-                    84.2774, 86.1891,85.4641, 86.0923, 85.0159, 84.0040
-            ];
             let table = document.getElementById('dollar-table');
+
             for(let i = 0; i < exchange.length; i++) {
                 let tr = document.createElement('tr');
                 let td = document.createElement('td');
-                td.innerText = exchange[i];
+                td.innerText = exchange[i].toFixed(2);
                 tr.appendChild(td);
                 table.appendChild(tr);
-            let sum = 0;
-            for let i 0
-
             }
+            let sum = 0;
+            for(let i = 0; i < exchange.length; i++) {
+                sum += exchange[i];
+            }
+            let average = sum / exchange.length;
+            average = average.toFixed(2);
+
+            document.getElementById('detail').innerText = 'Среднее значение курса: ' + average + ' RUB';
+                
+            let button = document.querySelector('button');
+            button.style.display = 'none';
         }
+        
     </script>
+    <style>
+        main {
+            text-align: center;
+        }
+        button {
+            border-radius: 0px;
+            height: 70px;
+            color: rgb(198, 186, 186);
+            background-color: rgb(86, 39, 39);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2em;
+        }
+        h1 {
+            text-shadow: 2px 2px 12px rgb(214, 208, 208);
+        }
+        td {
+            border: 2px solid rgb(133, 116, 116);
+            background-color: rgb(51, 47, 47);
+            color: rgb(218, 204, 204);
+            font-family: 'Times New Roman', Times, serif;
+            width: 80px;
+            height: 30px;
+            font-size: 1.2em;
+        }
+        #dollar-table {
+            margin: 20px auto;
+        }
+        #detail {
+            font-size: 1.3em;
+            font-weight: bold; 
+        }
+    </style>
 </head>
 <body>
     <header>
         НГТУ, ФБ, Лабораторная работа 7
     </header>
     <main>
-        <button onclick="showExchange()">Курс доллара</button>
+        <h1> Курс $ с 01/04/25-12/04/25</h1>
+        <button onclick="showExchange()">Показать курс</button>
         <table border="1" id="dollar-table"></table>
         <div id="detail"></div>
-        
-
     </main>
     <footer>
         <hr>
