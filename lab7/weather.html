@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script>
+        function showWeather() {
+          fetch('https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok')
+            .then(res => res.json())
+            .then(data => {
+                const times = data.hourly.time;
+                const temps = data.hourly.temperature_2m;
+                const today = new Date().toISOString().slice(0, 10);
+                const hours = ['08:00', '12:00', '20:00'];
+                let result = '';
+    
+                for (let i = 0; i < times.length; i++) {
+                    const [date, time] = times[i].split('T');
+                    if (date === today && hours.includes(time)) {
+                    result += `${time} — ${temps[i]} °C<br>`;
+                    }
+                }
+    
+                document.getElementById('weather').innerHTML = result || 'Нет данных на сегодня';
+            });
+        }
+    </script>
+    <style>
+        main { 
+            font-family: Verdana, Geneva, Tahoma, sans-serif; 
+            text-align: center; 
+            margin-top: 30px; 
+        }
+        button {
+            background-color: rgba(114, 10, 10, 0.608);
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgb(238, 233, 233);
+        }
+        button:hover {
+            background-color: rgb(73, 4, 4);
+            box-shadow: 0 0 5px #000;
+        }
+        button:active {
+            transform: scale(0.98);
+            background: linear-gradient(to right, #9e0909, #d9e22d);
+        }
+        #weather { 
+            margin-top: 20px; 
+            font-size: 18px; 
+        }
+      </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+    <main>
+        <h2>Температура в Новосибирске</h2>
+        <button onclick="showWeather()">Показать</button>
+        <div id="weather"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>    
+</body>
+</html>
