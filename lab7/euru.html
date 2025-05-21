@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script>
+            function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    const date = new Date(json.Date).toLocaleDateString('ru-RU');
+                    const rate = json.Valute.EUR.Value;
+                    const prev = json.Valute.EUR.Previous;
+                    const diff = (rate - prev).toFixed(4);
+                    
+
+                    let status = '';
+                    let statusClass = '';
+
+                    if (diff > 0) {
+                        status = 'Курс вырос на ' + diff;
+                        statusClass = 'up';
+                    } else if (diff < 0) {
+                        status = 'Курс упал на ' + Math.abs(diff);
+                        statusClass = 'down';
+                    } else {
+                        status = 'Курс не изменился';
+                        statusClass = '';
+                    }
+
+                    const block = document.getElementById('rate-info');
+                    block.innerHTML = 
+                        '<b>Дата:</b> ' + date + '<br>' +
+                        '<b>Текущий курс:</b> ' + rate.toFixed(3) + ' RUB<br>' +
+                        '<b>Вчерашний курс:</b> ' + prev.toFixed(3) + ' RUB<br>' +
+                        '<span class="' + statusClass + '"><b>' + status + '</b></span><br>' +
+                        '<a href="https://www.cbr-xml-daily.ru/">Виджет курса валют</a>';
+
+                    block.style.display = 'block';
+                });
+        }   
+    </script>
+    <style>
+        main {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+        button {
+            background-color: rgba(114, 10, 10, 0.608);
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgb(238, 233, 233);
+        }
+        button:hover {
+            background-color: rgb(73, 4, 4);
+            box-shadow: 0 0 5px #000;
+        }
+        #rate-info {
+            border: 3px solid rgb(46, 20, 6);
+            border-radius: 20px;
+            padding: 20px;
+            display: none;
+            background-color: #33140791;
+            color:beige;
+            font-size: 18px;
+            width: 200px;
+            margin: 30px auto;
+        }
+        .up { color: rgba(0, 128, 0, 0.701); 
+        }
+        .down { color: rgba(255, 0, 0, 0.666); 
+        }
+        a {
+            display: block;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Курс евро
+    </header>
+    <main>
+        <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="rate-info"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>    
+</body>
+</html>
