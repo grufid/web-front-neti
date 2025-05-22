@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шамшиева Даяна Артуровна. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+            margin: 20px;
+        }
+        .current {
+            font-size: 18px;
+            background: #4114143b;
+            border: 2px solid maroon;
+            border-radius: 10px;
+            width: 320px;
+            margin: 0 auto 20px;
+            padding: 10px;
+            text-align: center;
+        }
+        .chart-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+    </style>
+</head>
+<body onload="loadWeather()">
+
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <h1>Погода в Новосибирске</h1>
+
+        <div class="current" id="current">
+        Загрузка данных...
+        </div>
+
+        <div class="chart-container">
+        <canvas id="weatherChart"></canvas>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Шамшиева Даяна, ФБИ-32, 2 курс, 2025
+    </footer>
+
+    <script>
+        async function loadWeather() {
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m,apparent_temperature&current=temperature_2m,apparent_temperature&timezone=auto&past_days=1&forecast_days=2";
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const tempNow = data.current.temperature_2m;
+            const feelsNow = data.current.apparent_temperature;
+
+            document.getElementById("current").innerHTML = `
+            Температура сейчас: ${tempNow}°C<br>
+            Ощущается как: ${feelsNow}°C
+            `;
+            const labels = [];
+            const tempData = [];
+            const feelsData = [];
+
+            const times = data.hourly.time;
+            const temps = data.hourly.temperature_2m;
+            const feels = data.hourly.apparent_temperature;
+
+            for (let i = 0; i < times.length; i++) {
+            const time = new Date(times[i]);
+            const dateStr = time.toLocaleDateString("ru-RU", { day: '2-digit', month: '2-digit' });
+            const timeStr = time.toLocaleTimeString("ru-RU", { hour: '2-digit', minute: '2-digit' });
+            labels.push(`${dateStr}\n${timeStr}`);
+            tempData.push(temps[i]);
+            feelsData.push(feels[i]);
+            }
+
+            const ctx = document.getElementById("weatherChart").getContext("2d");
+            new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [
+                {
+                    label: "Температура (°C)",
+                    data: tempData,
+                    backgroundColor: "rgba(255, 99, 132, 0.7)"
+                },
+                {
+                    label: "Ощущается как (°C)",
+                    data: feelsData,
+                    backgroundColor: "rgba(54, 162, 235, 0.7)"
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                x: {
+                    ticks: {
+                    maxRotation: 90,
+                    minRotation: 60,
+                    callback: function(value, index) {
+                        return this.getLabelForValue(value).replace("\n", " ");
+                    }
+                    }
+                },
+                y: {
+                    beginAtZero: false
+                }
+                },
+                plugins: {
+                title: {
+                    display: true,
+                    text: "Прогноз погоды на сегодня и завтра"
+                },
+                legend: {
+                    position: 'top'
+                }
+                }
+            }
+            });
+
+        } 
+        catch (error) {
+            console.error("Ошибка при загрузке данных:", error);
+            document.getElementById("current").textContent = "Не удалось загрузить данные.";
+        }
+        }
+    </script>
+</body>
+</html>
+
+
