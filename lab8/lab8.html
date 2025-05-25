@@ -35,11 +35,27 @@
             <ul>
                 <li v-for="(ani, id) in anime">
                     {{ ani }} <button @click="edit(id, ani)">?</button>
-
                 </li>
             </ul>
             <hr>
 
+            <h2>Аниме</h2>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Редактировать</th>
+                    </tr>
+                </thead>
+                <tr v-for="(ani, id) in anime">
+                    <td>
+                        {{ ani }}
+                    </td>
+                    <td>
+                        <button @click="edit(id, ani)">?</button>
+                    </td>
+                </tr>
+            </table>
             <h2>Калькулятор</h2>
             <div class="row g-5">
                 <div class="col-auto">
