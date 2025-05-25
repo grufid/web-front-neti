@@ -25,6 +25,14 @@
             <div>Имя: {{ user.name }}</div>
             <div>Возраст: {{ user.age }}</div>
             <div>Порода: {{ user.breed }}</div>
+
+            <h2>Аниме</h2>
+            <ul>
+                <li v-for="(ani, id) in anime">
+                    {{ ani }} <button @click="edit(id, ani)">?</button>
+
+                </li>
+            </ul>
         </div>
     </main>
     <footer>
@@ -43,6 +51,7 @@
                         age: '1',
                         breed: 'mongrels'
                     },
+                    anime: ['Naruto', 'Hunter x Hunter', 'Jujutsu Kaisen', 'Attack on titan', 'One puncn man', 'Sword art online', 'Akame kill'],
                 }
             },
             methods: {
@@ -51,7 +60,11 @@
                 },
                 decCounter() {
                     this.counter--;
-                }
+                },
+                edit(id, ani) {
+                    let newName = prompt('Введите название аниме:', ani);
+                    this.anime[id] = newName;
+                },
             }
         }).mount('#app');
     </script>   
