@@ -16,6 +16,11 @@
             color: white;
             margin: 0px 0px 35px;
         }
+        footer, header {
+            background-color: rgb(185, 185, 185);
+            color:rgb(255, 255, 255);
+            text-shadow: 0px 0px 5px rgb(0, 0, 0);
+        }
     </style>
 </head>
 <body>
@@ -25,28 +30,39 @@
     <main>
         <div id="app">
             <h1 :title="messageRus">{{ message }}</h1>
-            <p>Счётчик: {{ counter }}</p>
+            <p class="alert alert-dark" role="alert"style="width: 18rem;">Счётчик: {{ counter }}</p>
             <button @click="incCounter" v-if='counter < 10'><i class="bi bi-plus-square-fill"></i></button>
             <button @click="decCounter" v-if="counter > 0"><i class="bi bi-dash-square-fill"></i></button>
             <hr>
-            <h2>Питомец:</h2>
-            <div>Имя: {{ user.name }}</div>
-            <div>Возраст: {{ user.age }}</div>
-            <div>Порода: {{ user.breed }}</div>
+            <div class="alert alert-dark" role="alert"style="width: 18rem;">
+                <h2 >Питомец:</h2>
+                <div>Имя: {{ user.name }}</div>
+                <div>Возраст: {{ user.age }}</div>
+                <div>Порода: {{ user.breed }}</div>
+            </div>
 
             <div class="card" style="width:18rem;">
                 <div class="card-body">
                     <h2 class="card-title">Аниме</h2>
                     <ul class="list-group">
                         <li v-for="(ani, id) in anime" class="list-group-item list-group-item-dark">
-                        {{ ani }} <button @click="edit(id, ani)"><i class="bi bi-pencil-square"></i></button>
+                        {{ ani }} <button @click="edit(id, ani)" v-if="ani !==null"><i class="bi bi-pencil" ></i></button>
+                        <div class="spinner-grow text-success" role="status" v-if="ani === null"> </div>
+                        <button @click="deleteAnime(id)" class="btn" v-if="ani !==null">
+                            <i class="bi bi-trash3"></i>
+                        </button>
                         </li>
                     </ul>
+                </div>
+                <div class="plus">
+                    <button @click="addAnime" class="btn btn-dark">
+                        <i class="bi bi-plus-square-fill"></i> Добавить аниме
+                    </button>
                 </div>
             </div>
 
             <h2>Аниме</h2>
-            <table class="table table-dark">
+            <table class="table table-dark" style="width:18rem;">
                 <thead>
                     <tr>
                         <th>Название</th>
@@ -81,7 +97,7 @@
                     <button @click="sum" class="btn btn-dark">=</button>
                 </div>
                 <div class="col-auto">
-                    <span class="badge text-bg-primary fs-5"> {{ result }}</span>
+                    <span class="badge text-bg-dark fs-4"> {{ result }}</span>
                 </div>
             </div> 
         </div>
@@ -101,7 +117,7 @@
                         age: '1',
                         breed: 'mongrels'
                     },
-                    anime: ['Naruto', 'Hunter x Hunter', 'Jujutsu Kaisen', 'Attack on titan', 'One puncn man', 'Sword art online', 'Akame kill'],
+                    anime: ['Naruto', 'Hunter x Hunter', 'Jujutsu Kaisen', 'Attack on titan', 'One punch man', 'Sword art online', 'Akame kill'],
                     a: 1,
                     b: 10,
                     result: '',
@@ -120,6 +136,17 @@
                     setTimeout(() => {
                         this.anime[id] = newName;
                     }, 3000);
+                },
+                deleteAnime(id) {
+                    if (confirm(`Удалить аниме "${this.anime[id]}"?`)) {
+                        this.anime.splice(id, 1);
+                    }
+                },
+                addAnime() {
+                    const name = prompt("Введите название нового аниме:");
+                    if (name) {
+                        this.anime.push(name);
+                    }
                 },
                 sum() {
                     this.result = this.a + this.b;
