@@ -32,8 +32,8 @@
             <div>Порода: {{ user.breed }}</div>
 
             <h2>Аниме</h2>
-            <ul>
-                <li v-for="(ani, id) in anime">
+            <ul class="list-group">
+                <li v-for="(ani, id) in anime" class="list-group-item list-group-item-dark">
                     {{ ani }} <button @click="edit(id, ani)">?</button>
                 </li>
             </ul>
