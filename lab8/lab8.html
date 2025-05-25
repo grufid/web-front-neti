@@ -26,8 +26,8 @@
         <div id="app">
             <h1 :title="messageRus">{{ message }}</h1>
             <p>Счётчик: {{ counter }}</p>
-            <button @click="incCounter" v-if='counter < 10'>++</button>
-            <button @click="decCounter" v-if="counter > 0">--</button>
+            <button @click="incCounter" v-if='counter < 10'><i class="bi bi-plus-square-fill"></i></button>
+            <button @click="decCounter" v-if="counter > 0"><i class="bi bi-dash-square-fill"></i></button>
             <hr>
             <h2>Питомец:</h2>
             <div>Имя: {{ user.name }}</div>
@@ -39,7 +39,7 @@
                     <h2 class="card-title">Аниме</h2>
                     <ul class="list-group">
                         <li v-for="(ani, id) in anime" class="list-group-item list-group-item-dark">
-                        {{ ani }} <button @click="edit(id, ani)">?</button>
+                        {{ ani }} <button @click="edit(id, ani)"><i class="bi bi-pencil-square"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -55,10 +55,14 @@
                 </thead>
                 <tr v-for="(ani, id) in anime">
                     <td>
-                        {{ ani }}
+                        <span v-if="ani === null">загружается...</span>
+                        <span v-else>{{ ani }}</span>
                     </td>
                     <td>
-                        <button @click="edit(id, ani)" class="btn btn-success"><i class="bi bi-pencil"></i></button>
+                        <button @click="edit(id, ani)" class="btn btn-success" v-if="ani !== null">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <div class="spinner-grow text-success" role="status" v-if="ani === null"></div>
                     </td>
                 </tr>
             </table>
@@ -68,13 +72,13 @@
                     <input type="number" v-model="a" class="form-control">
                 </div>
                 <div class="col-auto">
-                    +
+                    <i class="bi bi-plus-circle"></i>
                 </div>
                 <div class="col-auto">
                     <input type="number" v-model="b" class="form-control">
                 </div>
                 <div class="col-auto">
-                    <button @click="sum" class="btn btn-primary">=</button>
+                    <button @click="sum" class="btn btn-dark">=</button>
                 </div>
                 <div class="col-auto">
                     <span class="badge text-bg-primary fs-5"> {{ result }}</span>
@@ -112,7 +116,7 @@
                 },
                 edit(id, ani) {
                     let newName = prompt('Введите название аниме:', ani);
-                    this.anime[id] = 'сохранение...';
+                    this.anime[id] = null;
                     setTimeout(() => {
                         this.anime[id] = newName;
                     }, 3000);
