@@ -63,7 +63,10 @@
                 },
                 edit(id, ani) {
                     let newName = prompt('Введите название аниме:', ani);
-                    this.anime[id] = newName;
+                    this.anime[id] = 'сохранение...';
+                    setTimeout(() => {
+                        this.anime[id] = newName;
+                    }, 3000);
                 },
             }
         }).mount('#app');
