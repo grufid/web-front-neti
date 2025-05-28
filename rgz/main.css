@@ -43,7 +43,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     display: flex;
     flex-direction: column; /*располагаться в столбик*/
     background: #f2f5f8;
@@ -93,6 +93,7 @@ h1, h6 {
     background-position: center; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
     padding: 200px;
+    box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.615);
 }
 header {
     position:fixed;
@@ -195,6 +196,7 @@ h3 {
     background-position: center; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
     padding: 200px;
+    box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.615);
 }
 #base li {
     padding: 5px;
@@ -217,6 +219,14 @@ footer {
     z-index: 20;
 }
 #Top:hover {
-    color: rgba(0, 0, 0, 0.745);
-
+    color: rgba(0, 0, 0, 0.745);    
+}
+#news {
+    margin-top: 60px;
+    background-image: url('news.jpg'); 
+    background-size: cover; /* Покрытие всего блока */
+    background-position: center; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    padding: 120px;
+    box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.615);
 }
