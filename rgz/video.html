@@ -8,12 +8,48 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
     <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        #videoFrame {
+            border-radius: 100px;
+            box-shadow: 0px 0px 200px 100px rgb(124, 2, 2);
+            mix-blend-mode: multiply;
+        }   
+        .video {
+            position: relative;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5em;
+            color:rgba(243, 242, 242, 0.749);
+            text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.304);
+            font-weight: normal;
+            position:relative;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <header class="logo"><a href="https://softline.ru/"><img src="logo.svg" title="Официальный сайт"></a>
+    <header class="logo" style="position: absolute; left: 0;"><a href="https://softline.ru/"><img src="logo.svg" title="Официальный сайт"></a>
         <a class="a2" href="rgz.html"><b>Главная</b></a>
     </header>
     <main>
+        <div>
+        <h1>Видео о компании</h1>
+        </div>
+        <div class="video">
+            <iframe id="videoFrame" width="950" height="480" src="https://rutube.ru/embed/7c55c4f20b93961999d283e022c921d6" frameBorder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+        <div id="base">
+            <p>Группа компаний Softline (ПАО «Софтлайн») — инвестиционно-технологический холдинг, лидирующий в ряде сегментов рынка технологий, 
+                c более чем 30-летним опытом и широким региональным присутствием в России, Казахстане, Узбекистане, Вьетнаме и ОАЭ.</p>
+            <p>ПАО «Софтлайн» является публичной компанией, акции и облигации которой торгуются на Московской бирже (тикер – SOFL).</p>
+        </div>
+        
         <ul id="menu">
             <li class="li"><a class="a1" href="history.html">О нас</a></li>
             <li class="li"><a class="a1" href="news.html">Новости</a></li>
@@ -27,6 +63,5 @@
         <p>© 1993—2025 Softline</p>
         <p>16+</p>
     </footer>
-    
 </body>
 </html>

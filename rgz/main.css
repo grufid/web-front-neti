@@ -227,6 +227,6 @@ footer {
     background-size: cover; /* Покрытие всего блока */
     background-position: center; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-    padding: 120px;
+    padding: 60px;
     box-shadow: inset 0px 0px 30px 5px rgba(0, 0, 0, 0.615);
 }
